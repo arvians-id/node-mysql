@@ -1,0 +1,30 @@
+<button class="btn btn-primary mt-3">Tambah data</button>
+<div class="card mt-3">
+    <div class="card-header">
+        Data Fakultas
+    </div>
+    <div class="card-body">
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">No</th>
+                    <th>Fakultas</th>
+                    <th>Dibuat</th>
+                    <th>Terakhid Diubah</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% faculties.forEach((faculty, i) => { %>
+                    <tr>
+                        <td class="text-center"><%- i + 1 %></td>
+                        <td><%- faculty.name %></td>
+                        <td><%- faculty.createdAt %></td>
+                        <td><%- faculty.updatedAt %></td>
+                        <td><a href="" class="btn btn-primary">Detail</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
