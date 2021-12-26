@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('faculty', {
+    return sequelize.define('Faculty', {
         id: {
             type: DataTypes.BIGINT,
             autoIncrement: true,
