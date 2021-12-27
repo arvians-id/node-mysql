@@ -37,6 +37,7 @@ exports.store = async (req, res) => {
         name: req.body.name
     });
 
+    req.flash('success', 'Data successfuly added!');
     res.redirect('/faculties');
 }
 
@@ -47,5 +48,6 @@ exports.destroy = async (req, res) => {
         }
     })
 
+    req.flash('success', 'Data successfuly deleted!');
     res.redirect('/faculties');
 }
