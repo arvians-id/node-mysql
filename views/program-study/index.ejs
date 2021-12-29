@@ -1,7 +1,7 @@
-<a href="/faculties/create" class="btn btn-primary mt-3">Tambah data</a>
+<a href="/program-studies/create" class="btn btn-primary mt-3">Tambah data</a>
 <div class="card mt-3">
     <div class="card-header">
-        Data Fakultas
+        Data Program Studi
     </div>
     <div class="card-body">
         <%- include('../layouts/partials/alerts') %>
@@ -10,21 +10,23 @@
                 <tr>
                     <th style="width: 5%;">No</th>
                     <th>Fakultas</th>
+                    <th>Program Studi</th>
                     <th>Dibuat</th>
                     <th>Terakhid Diubah</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <% facultiesList.forEach((faculty, i) => { %>
+                <% programStudyList.forEach((programStudy, i) => { %>
                     <tr>
                         <td class="text-center"><%- i + 1 %></td>
-                        <td><%- faculty.name %></td>
-                        <td><%- faculty.createdAt %></td>
-                        <td><%- faculty.updatedAt %></td>
+                        <td><%- programStudy.faculty.name %></td>
+                        <td><%- programStudy.name %></td>
+                        <td><%- programStudy.createdAt %></td>
+                        <td><%- programStudy.updatedAt %></td>
                         <td>
-                            <a href="/faculties/<%- faculty.id %>" class="btn btn-primary btn-sm">Detail</a>
-                            <form action="/faculties/<%- faculty.id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                            <a href="/program-studies/<%- programStudy.id %>" class="btn btn-primary btn-sm">Detail</a>
+                            <form action="/program-studies/<%- programStudy.id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                                 <button class="btn btn-danger btn-sm">Delete</button>
                             </form>

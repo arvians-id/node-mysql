@@ -1,24 +1,35 @@
 'use strict';
-
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Faculty extends Model {
+  class ProgramStudy extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.faculty, {
+        as: 'faculty'
+      });
     }
   };
-  Faculty.init({
+  ProgramStudy.init({
     id: {
       type: DataTypes.BIGINT,
       autoIncrement: true,
       primaryKey:true,
+      allowNull: false
+    },
+    facultyId: {
+      type: DataTypes.BIGINT,
+      references: {
+        model: "faculty",
+        key: "id"
+      },
+      onUpdate: 'CASCADE',
+      onDELETE: 'CASCADE',
       allowNull: false
     },
     name: {
@@ -35,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'faculty',
+    modelName: 'program_study',
   });
-  return Faculty;
+  return ProgramStudy;
 };
