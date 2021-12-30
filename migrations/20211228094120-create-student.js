@@ -24,7 +24,7 @@ module.exports = {
           key: "id"
         },
         onUpdate: 'CASCADE',
-        onDELETE: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       jenisKelamin: {
         type: Sequelize.STRING,

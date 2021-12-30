@@ -1,0 +1,39 @@
+<a href="/students/create" class="btn btn-primary mt-3">Tambah data</a>
+<div class="card mt-3">
+    <div class="card-header">
+        Data Mahasiswa
+    </div>
+    <div class="card-body">
+        <%- include('../layouts/partials/alerts') %>
+        <table id="myTable" class="display">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">No</th>
+                    <th>Fakultas</th>
+                    <th>Program Studi</th>
+                    <th>Nama</th>
+                    <th>NIM</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% studentList.forEach((student, i) => { %>
+                    <tr>
+                        <td class="text-center"><%- i + 1 %></td>
+                        <td><%- student.program_study.faculty.name %></td>
+                        <td><%- student.program_study.name %></td>
+                        <td><%- student.fullName %></td>
+                        <td><%- student.nim %></td>
+                        <td>
+                            <a href="/students/<%- student.id %>" class="btn btn-primary btn-sm">Detail</a>
+                            <form action="/students/<%- student.id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

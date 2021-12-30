@@ -1,0 +1,47 @@
+<a href="/students" class="btn btn-primary mt-3">Lihat data</a>
+<div class="card mt-3">
+    <div class="card-header">
+        Buat Mahasiswa
+    </div>
+    <div class="card-body">
+        <%- include('../layouts/partials/alerts') %>
+        <form action="/students" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <div class="mb-3">
+                <label class="form-label">Nama Fakultas</label>
+                <select name="faculty" class="form-control">
+                    <option value="" selected disabled>Pilih</option>
+                    <% facultyList.forEach((val, i) => { %>
+                        <option value="<%- val.id %>"><%- val.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nama Program Studi</label>
+                <select name="program_study" class="form-control">
+                    <option value="" selected disabled>Pilih</option>
+                    <% facultyList.forEach((val, i) => { %>
+                        <option value="<%- val.id %>"><%- val.name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nama Mahasiswa</label>
+                <input type="text" name="fullName" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Jenis Kelamin</label>
+                <select name="jenisKelamin" class="form-control">
+                    <option value="" selected disabled>Pilih</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">No Handphone</label>
+                <input type="text" name="noHandphone" class="form-control">
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

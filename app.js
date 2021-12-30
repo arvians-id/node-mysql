@@ -49,8 +49,8 @@ app.use(csrf({ cookie: true }));
 app.use((req, res, next) => {
   res.cookie('XSRF-TOKEN', req.csrfToken());
   res.locals.csrfToken = req.csrfToken();
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success') || '';
+  res.locals.fail = req.flash('fail') || '';
   
   next();
 })

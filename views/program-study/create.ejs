@@ -4,6 +4,7 @@
         Buat Fakultas
     </div>
     <div class="card-body">
+        <%- include('../layouts/partials/alerts') %>
         <form action="/program-studies" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <div class="mb-3">

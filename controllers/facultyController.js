@@ -16,7 +16,7 @@ exports.index = async (req, res) => {
 
         res.render('layouts/index', data)
     } catch(error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/faculties');
     }
 }
@@ -27,7 +27,7 @@ exports.show = async (req, res) => {
 
         res.json(dataFaculty)
     } catch(error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/faculties');
     }
 }
@@ -41,7 +41,7 @@ exports.create = (req, res) => {
         
         res.render('layouts/index', data)
     } catch(error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/faculties');
     }
 }
@@ -55,7 +55,7 @@ exports.store = async (req, res) => {
         req.flash('success', 'Data successfuly added!');
         res.redirect('/faculties');
     } catch(error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/faculties');
     }
 }
@@ -71,7 +71,7 @@ exports.destroy = async (req, res) => {
         req.flash('success', 'Data successfuly deleted!');
         res.redirect('/faculties');
     } catch(error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/faculties');
     }
 }

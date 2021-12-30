@@ -16,7 +16,7 @@ exports.index = async(req, res) => {
         }
         res.render('layouts/index', data)
     } catch(error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/program-studies');
     }
 }
@@ -31,7 +31,7 @@ exports.show = async (req, res) => {
 
         res.json(dataProgramStudy);
     } catch (error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/program-studies');
     }
 }
@@ -46,7 +46,7 @@ exports.create = async (req, res) => {
         }
         res.render('layouts/index', data)
     } catch (error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/program-studies');
     }
 }
@@ -60,7 +60,7 @@ exports.store = async (req, res) => {
         req.flash('success', 'Data successfuly added');
         res.redirect('/program-studies');
     } catch (error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/program-studies');
     }
 }
@@ -75,7 +75,7 @@ exports.destroy = async (req, res) => {
         req.flash('success', 'Data successfuly deleted!');
         res.redirect('/program-studies');
     } catch(error) {
-        req.flash('error', error.message);
+        req.flash('fail', error.message);
         res.redirect('/program-studies');
     }
 }
