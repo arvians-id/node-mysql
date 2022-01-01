@@ -51,6 +51,7 @@ app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken();
   res.locals.success = req.flash('success') || '';
   res.locals.fail = req.flash('fail') || '';
+  res.locals.post = req.flash('post')[0] || '';
   
   next();
 })

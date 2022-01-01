@@ -12,36 +12,71 @@
                 <select name="faculty" class="form-control">
                     <option value="" selected disabled>Pilih</option>
                     <% facultyList.forEach((val, i) => { %>
-                        <option value="<%- val.id %>"><%- val.name %></option>
+                        <option value="<%- val.id %>" <%- post.faculty == val.id ? 'selected' : ''  %>><%- val.name %></option>
                     <% }) %>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nama Program Studi</label>
-                <select name="program_study" class="form-control">
+                <select name="programStudy" class="form-control">
                     <option value="" selected disabled>Pilih</option>
-                    <% facultyList.forEach((val, i) => { %>
-                        <option value="<%- val.id %>"><%- val.name %></option>
-                    <% }) %>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nama Mahasiswa</label>
-                <input type="text" name="fullName" class="form-control">
+                <input type="text" name="fullName" value="<%- post.fullName  %>" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Nomor Induk Mahasiswa</label>
+                <input type="text" name="nim" value="<%- post.nim  %>" class="form-control">
             </div>
             <div class="mb-3">
                 <label class="form-label">Jenis Kelamin</label>
                 <select name="jenisKelamin" class="form-control">
                     <option value="" selected disabled>Pilih</option>
-                    <option value="Laki-laki">Laki-laki</option>
-                    <option value="Perempuan">Perempuan</option>
+                    <option value="Laki-laki" <%- post.jenisKelamin == 'Laki-laki' ? 'selected' : ''  %>>Laki-laki</option>
+                    <option value="Perempuan" <%- post.jenisKelamin == 'Perempuan' ? 'selected' : ''  %>>Perempuan</option>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">No Handphone</label>
-                <input type="text" name="noHandphone" class="form-control">
+                <input type="text" name="noHandphone" value="<%- post.noHandphone  %>" class="form-control">
             </div>
             <button class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
+
+<script>
+    const facultyInput = document.querySelector('[name="faculty"]');
+    const programStudyInput = document.querySelector('[name="programStudy"]')
+    const facultyId = '<%- post.faculty %>' || '';
+    const programStudyId = '<%- post.programStudy %>' || '';
+
+    const getData = async (path, option = {}) => {
+        const data = await fetch(path, option);
+        
+        return data.json();
+    }
+    const getProgramStudy = (path) => {
+        getData(path)
+            .then(data => {
+                let html = '<option value="" selected disabled>Pilih</option>';
+                data.data.forEach(val => {
+                    html += `<option value="${val.id}" ${programStudyId == val.id ? 'selected' : ''}>${val.name}</option>`
+                });
+                programStudyInput.innerHTML = html;
+            })
+            .catch(error => console.log(error.message));
+
+    }
+    facultyInput.addEventListener('change', async function(e){
+        const id = e.target.value;
+        const path = 'http://127.0.0.1:8000/students/getProgramStudies/' + id || facultyId;
+
+        getProgramStudy(path)
+    })
+
+    const path = `http://127.0.0.1:8000/students/getProgramStudies/${facultyId}`;
+    getProgramStudy(path)
+</script>

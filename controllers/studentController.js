@@ -46,14 +46,13 @@ exports.show = async (req, res) => {
 
 exports.create = async (req, res) => {
     try {
+        console.log(res.locals.post);
         const facultyList = await faculty.findAll();
-        const programStudyList = await program_study.findAll();
 
         const data = { 
             title: 'Tambah Data Mahasiswa',
             content: '../student/create',
             facultyList,
-            programStudyList
         }
         res.render('layouts/index', data)
     } catch (error) {
@@ -66,7 +65,7 @@ exports.store = async (req, res) => {
         await student.create({
             fullName: req.body.fullName,
             nim: req.body.nim,
-            programStudyId: req.body.program_study,
+            programStudyId: req.body.programStudy,
             jenisKelamin: req.body.jenisKelamin,
             noHandphone: req.body.noHandphone
         })
@@ -91,5 +90,26 @@ exports.destroy = async (req, res) => {
     } catch(error) {
         req.flash('fail', error.message);
         res.redirect('/students');
+    }
+}
+
+exports.getProgramStudies = async (req, res) => {
+    try {
+        const programStudyList = await program_study.findAll({
+            where: {
+                facultyId: req.params.facultyId
+            }
+        })
+
+        res.json({
+            status: 200,
+            data: programStudyList,
+            message: 'Data success'
+        })
+    } catch (error) {
+        res.json({
+            status: 500,
+            message: error.message
+        });
     }
 }
