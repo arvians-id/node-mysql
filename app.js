@@ -3,6 +3,7 @@ require('dotenv').config();
 // HTTP
 const createError = require('http-errors');
 
+
 // Express
 const express = require('express');
 const path = require('path');
@@ -12,6 +13,13 @@ const logger = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+
+
+// Config
+const initializePassport = require('./config/passport');
+initializePassport(passport);
+
 const app = express();
 
 // View Engine Setup
@@ -26,6 +34,9 @@ app.use(express.urlencoded({ extended: false }));
 // Cookie Parser
 app.use(cookieParser());
 
+// Flash Message
+app.use(flash());
+
 // Session
 app.use(
   session({
@@ -35,8 +46,10 @@ app.use(
   }),
 );
 
-// Flash Message
-app.use(flash());
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -49,16 +62,14 @@ app.use(csrf({ cookie: true }));
 app.use((req, res, next) => {
   res.cookie('XSRF-TOKEN', req.csrfToken());
   res.locals.csrfToken = req.csrfToken();
-  res.locals.success = req.flash('success') || '';
-  res.locals.fail = req.flash('fail') || '';
   res.locals.post = req.flash('post')[0] || '';
+  res.locals.messages = req.flash();
   
   next();
 })
 
 // Routes
-app.get('/', (req, res) => res.redirect('/faculties'));
-require('./routes')(app);
+require('./routes')(app, passport);
 app.use(function(req, res, next) {
   next(createError(404));
 });

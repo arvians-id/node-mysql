@@ -1,4 +1,5 @@
 'use strict';
+
 const {
   Model
 } = require('sequelize');
@@ -16,12 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   ProgramStudy.init({
-    id: {
-      type: DataTypes.BIGINT,
-      autoIncrement: true,
-      primaryKey:true,
-      allowNull: false
-    },
     facultyId: {
       type: DataTypes.BIGINT,
       references: {
@@ -35,14 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE
     }
   }, {
     sequelize,

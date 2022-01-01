@@ -15,12 +15,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Student.init({
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.INTEGER
-    },
     fullName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -45,14 +39,6 @@ module.exports = (sequelize, DataTypes) => {
     noHandphone: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE
     }
   }, {
     sequelize,

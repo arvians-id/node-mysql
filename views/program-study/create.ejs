@@ -12,13 +12,13 @@
                 <select name="faculty" class="form-control">
                     <option value="" selected disabled>Pilih</option>
                     <% facultyList.forEach((val, i) => { %>
-                        <option value="<%- val.id %>"><%- val.name %></option>
+                        <option value="<%- val.id %>" <%- post.faculty == val.id ? 'selected' : ''  %>><%- val.name %></option>
                     <% }) %>
                 </select>
             </div>
             <div class="mb-3">
                 <label class="form-label">Nama Program Studi</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" value="<%- post.name  %>" class="form-control">
             </div>
             <button class="btn btn-primary">Submit</button>
         </form>

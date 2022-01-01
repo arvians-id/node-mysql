@@ -1,18 +1,18 @@
-<% if(success != '') { %>
+<% if(messages.success != null) { %>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <%= success %>
+    <%= messages.success %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <% } %>
 
-<% if(fail != '') { %>
+<% if(messages.error != null) { %>
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <% if(fail[0].param) { %>
-        <% fail.forEach(value => { %>
+    <% if(messages.error[0].param) { %>
+        <% messages.error.forEach(value => { %>
             <%= value.msg %> <br>
         <% }) %>
     <% } else { %>
-        <%= fail %>
+        <%= messages.error %>
     <% } %>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>

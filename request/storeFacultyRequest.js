@@ -12,7 +12,8 @@ const validateTodo = [
     (req, res, next) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()){
-            req.flash('fail', errors.array());
+            req.flash('post', req.body);
+            req.flash('error', errors.array());
             res.redirect('/faculties/create');
 
             return false;
