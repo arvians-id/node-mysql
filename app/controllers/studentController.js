@@ -46,7 +46,6 @@ exports.show = async (req, res) => {
 
 exports.create = async (req, res) => {
     try {
-        console.log(res.locals.post);
         const facultyList = await faculty.findAll();
 
         const data = { 

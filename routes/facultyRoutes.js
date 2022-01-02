@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const facultyController = require('../controllers/facultyController');
-const storeSalidation = require('../request/storeFacultyRequest');
-const { isAuthenticated } = require('../middleware');
+const facultyController = require('../app/controllers/facultyController');
+const storeSalidation = require('../app/request/storeFacultyRequest');
+const { isAuthenticated } = require('../app/middleware');
 
 module.exports = app => {
     router.get('/', facultyController.index);

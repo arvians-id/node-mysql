@@ -29,7 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       allowNull: false,
       type: DataTypes.STRING
-    }
+    },
+    image: {
+      defaultValue: 'image.png',
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'user',

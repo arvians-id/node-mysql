@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const registerController = require('../controllers/auth/registerController');
-const storeValidation = require('../request/storeUserRequest');
-const { isNotAuthenticated } = require('../middleware');
+const registerController = require('../app/controllers/auth/registerController');
+const storeValidation = require('../app/request/storeUserRequest');
+const { isNotAuthenticated } = require('../app/middleware');
 
 module.exports = app => {
     router.get('/', registerController.index);
