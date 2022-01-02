@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     image: {
-      defaultValue: 'image.png',
+      defaultValue: 'public/images/default.png',
       type: DataTypes.STRING
     },
   }, {

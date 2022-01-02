@@ -14,7 +14,7 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-
+const multer = require('multer');
 
 // Config
 const initializePassport = require('./config/passport');
@@ -46,6 +46,23 @@ app.use(
   }),
 );
 
+const storage = multer.diskStorage({
+  destination: (req, file, done) => {
+      done(null, 'public/images');
+  },
+  filename: (req, file, done) => {
+      const unique = Date.now() + '-' + Math.round(Math.random() * 1E9);
+      done(null, unique + '-' + file.originalname);
+  }
+});
+
+const fileFilter = (req, file, done) => {
+  if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg')
+      done(null, true);
+  else
+      done(null, false);
+}
+app.use(multer({ storage, fileFilter }).single('image'))
 
 // Passport
 app.use(passport.initialize());

@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       image: {
-        defaultValue: 'image.png',
+        defaultValue: 'public/images/default.png',
         type: Sequelize.STRING
       },
       createdAt: {

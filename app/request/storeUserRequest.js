@@ -1,4 +1,5 @@
 const { check, validationResult } = require('express-validator');
+const multer = require('multer');
 
 const rules = [
     check('name')
@@ -12,17 +13,21 @@ const rules = [
         .trim()
         .escape(),
     check('password')
-        .notEmpty().withMessage('The password field cannot be empty')
+        .notEmpty().withMessage('The password field cannot be empty').bail()
         .isLength({ min: 5 })
         .trim()
         .escape(),
-    check('password_confirmation').custom((value, { req }) => {
-        if (value !== req.body.password) {
-            throw new Error('Password confirmation does not match password');
-        }
-    
-        return true;
-    })
+    check('password_confirmation')
+        .notEmpty().withMessage('The password confirmation field cannot be empty')
+        .custom((value, { req }) => {
+            if (value !== req.body.password) {
+                throw new Error('Password confirmation does not match password');
+            }
+        
+            return true;
+        })
+        .trim()
+        .escape(),
 ];
 
 const validateTodo = [

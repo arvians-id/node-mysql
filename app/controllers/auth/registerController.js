@@ -22,8 +22,9 @@ exports.register = async (req, res) => {
         await user.create({
             name: req.body.name,
             email: req.body.email,
-            password: password
-        })
+            password: password,
+            image: req.file.path
+        });
 
         req.flash('success', 'Data successfuly added, you can login now!');
         res.redirect('/');
