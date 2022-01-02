@@ -32,9 +32,7 @@ const validateTodo = [
         if(!errors.isEmpty()){
             req.flash('post', req.body);
             req.flash('error', errors.array());
-            res.redirect('/register');
-
-            return false;
+            return res.redirect('/register');
         }
         next()
     }

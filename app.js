@@ -41,8 +41,8 @@ app.use(flash());
 app.use(
   session({
     secret: 'secret',
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   }),
 );
 
@@ -64,6 +64,7 @@ app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken();
   res.locals.post = req.flash('post')[0] || '';
   res.locals.messages = req.flash();
+  res.locals.user = req.user;
   
   next();
 })
@@ -76,8 +77,8 @@ app.use(function(req, res, next) {
 
 // Error handler
 app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.messageSystem = err.message;
+  res.locals.errorSystem = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);
   res.render('errors/error');

@@ -20,9 +20,7 @@ const validateTodo = [
         if(!errors.isEmpty()){
             req.flash('post', req.body);
             req.flash('error', errors.array());
-            res.redirect('/');
-
-            return false;
+            return res.redirect('/');
         }
         next()
     }

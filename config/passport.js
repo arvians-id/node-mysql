@@ -31,11 +31,7 @@ module.exports = passport => {
 
     passport.deserializeUser(async (id, done) => {
         try{
-            const users = await user.findAll({
-                where: {
-                    id: id
-                }
-            });
+            const users = await user.findByPk(id);
             return done(null, users);
         }catch(e){
             return done(e)

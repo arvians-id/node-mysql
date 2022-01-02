@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const programStudyController = require('../controllers/programStudyController');
 const storeValidation = require('../request/storeProgramStudyRequest');
+const { isAuthenticated } = require('../middleware');
 
 module.exports = app => {
     router.get('/', programStudyController.index);
@@ -9,5 +10,5 @@ module.exports = app => {
     router.get('/:id', programStudyController.show);
     router.delete('/:id', programStudyController.destroy);
 
-    app.use('/program-studies', router);
+    app.use('/program-studies', isAuthenticated, router);
 }

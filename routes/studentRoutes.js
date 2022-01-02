@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const studentController  = require('../controllers/studentController');
 const storeValidation = require('../request/storeStudentRequest');
+const { isAuthenticated } = require('../middleware');
 
 module.exports = (app) => {
     router.get('/', studentController.index);
@@ -10,5 +11,5 @@ module.exports = (app) => {
     router.get('/:id', studentController.show);
     router.delete('/:id', studentController.destroy);
 
-    app.use('/students', router);
+    app.use('/students', isAuthenticated, router);
 } 

@@ -12,6 +12,9 @@ exports.index = (req, res) => {
     }
 }
 
-exports.login = (res, req) => {
-    console.log("OK");
+exports.logout = (req, res) => {
+    req.logout();
+    req.session.destroy();
+
+    res.redirect('/');
 }
