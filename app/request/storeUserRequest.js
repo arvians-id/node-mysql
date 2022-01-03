@@ -1,5 +1,5 @@
 const { check, validationResult } = require('express-validator');
-const multer = require('multer');
+const { upload, multer } = require('../../config/multer');
 
 const rules = [
     check('name')
@@ -28,17 +28,37 @@ const rules = [
         })
         .trim()
         .escape(),
+    check('image')
+        .custom((value, { req }) => {
+            if(typeof req.file == 'undefined')
+                throw new Error('The image field invalid');
+            
+            return true
+        })
 ];
 
 const validateTodo = [
+    (req, res, next) => {
+        upload.single('image')(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+                console.log(err.message);
+            } else if (err) {
+                console.log(err.message);
+            }
+            
+            next()
+        })
+    },
     rules,
     (req, res, next) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()){
             req.flash('post', req.body);
             req.flash('error', errors.array());
+
             return res.redirect('/register');
         }
+        
         next()
     }
 ]

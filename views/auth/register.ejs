@@ -4,8 +4,7 @@
     </div>
     <div class="card-body">
         <%- include('../layouts/partials/alerts') %>
-        <form action="/register" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <form action="/register?_csrf=<%= csrfToken %>" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
                 <label class="form-label">Nama</label>
                 <input type="text" name="name" value="<%- post.name  %>" class="form-control">
@@ -25,6 +24,7 @@
             <div class="mb-3">
                 <label class="form-label">Nama</label>
                 <input type="file" name="image" class="form-control">
+                <small class="text-danger">Support JPG, PNG, JPEG. Maksimal 1 MB</small>
             </div>
             <button class="btn btn-primary">Submit</button>
         </form>
